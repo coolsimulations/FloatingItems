@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "compatibilityLevel": "JAVA_8",
+  "package": "net.coolsimulations.FloatingItems.mixin",
+  "refmap": "refmap.floatingitems.json",
+  "mixins": [
+      "EntityItemMixin"
+  ],
+  "injectors": {
+      "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

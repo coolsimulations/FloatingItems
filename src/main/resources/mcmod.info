@@ -1,0 +1,15 @@
+[
+{
+  "modid": "floatingitems",
+  "name": "FloatingItems",
+  "description": "A small server-side mod, that can be used on single-player too, that makes items float in water like 1.13+.",
+  "version": "",
+  "mcversion": "${mcversion}",
+  "url": "https://curseforge.com/minecraft/mc-mods/floatingitems",
+  "authorList": ["coolsim"],
+  "credits": "To Mojang, who added floating items in 1.13+ and forever corrupted my pre-1.13 experience, forcing me to make this mod. Small credit to Google Translate and Microsoft Translate for the majority of the translations.",
+  "logoFile": "logo.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]
