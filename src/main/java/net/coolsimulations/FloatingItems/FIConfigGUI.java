@@ -24,12 +24,24 @@ public class FIConfigGUI implements IModGuiFactory {
     {
 
     }
+    
+    @Override
+	public Class<? extends GuiScreen> mainConfigGuiClass()
+    {
+    	return FIConfigGUIInner.class;
+	}
 
     @Override
     public Set<RuntimeOptionCategoryElement> runtimeGuiCategories()
     {
         return null;
     }
+    
+    @Override
+	public RuntimeOptionGuiHandler getHandlerFor(RuntimeOptionCategoryElement element)
+    {
+		return null;
+	}
 
 	public GuiScreen createConfigGui(GuiScreen arg0)
 	{

@@ -27,20 +27,20 @@ public abstract class EntityItemMixin extends Entity {
 	}
 
 	@Shadow
-	public abstract ItemStack getItem();
+	public abstract ItemStack getEntityItem();
 
 	@Inject(at = @At("HEAD"), method = "onUpdate", cancellable = true)
 	public void onUpdate(CallbackInfo info) {
 
 		boolean shouldFloat = false;
 
-		if (!getItem().getItem().onEntityItemUpdate(((EntityItem) (Object) this)) && !this.getItem().isEmpty()) {
+		if (!getEntityItem().getItem().onEntityItemUpdate(((EntityItem) (Object) this)) && !this.getEntityItem().isEmpty()) {
 
 			if(FIConfig.blacklistItems != null && FIConfig.blacklistItems.length >= 1) {
 				for(FIConfigItem blacklistItem : FIConfig.blacklistItems) {
-					if(blacklistItem.getItem().equals(this.getItem().getItem())) {
+					if(blacklistItem.getItem().equals(this.getEntityItem().getItem())) {
 
-						if(blacklistItem.getMeta() == this.getItem().getMetadata()) {
+						if(blacklistItem.getMeta() == this.getEntityItem().getMetadata()) {
 							return;
 						} else {
 							shouldFloat = true;
@@ -51,7 +51,7 @@ public abstract class EntityItemMixin extends Entity {
 			
 			if(!shouldFloat && FIConfig.blacklistRegistryItems != null && FIConfig.blacklistRegistryItems.length >= 1) {
 				for(String blacklistItem : FIConfig.blacklistRegistryItems) {
-					if(blacklistItem.equals(this.getItem().getItem().getRegistryName().toString())) {
+					if(blacklistItem.equals(this.getEntityItem().getItem().getRegistryName().toString())) {
 						return;
 					}
 				}
@@ -66,9 +66,9 @@ public abstract class EntityItemMixin extends Entity {
 
 							for(ItemStack stack : OreDictionary.getOres(oreDictEntry)) {
 
-								if(stack.getItem().equals(this.getItem().getItem())) {
+								if(stack.getItem().equals(this.getEntityItem().getItem())) {
 
-									if(stack.getMetadata() == this.getItem().getMetadata()) {
+									if(stack.getMetadata() == this.getEntityItem().getMetadata()) {
 										return;
 									} else {
 										shouldFloat = true;

@@ -157,7 +157,7 @@ public class FIConfig {
 		@Override
 		public String toString() {
 
-			return "{" + registry.getNamespace() + ":" + registry.getPath() + "}(" + this.meta + ")";
+			return "{" + registry.getResourceDomain() + ":" + registry.getResourcePath() + "}(" + this.meta + ")";
 		}
 
 		@Override
