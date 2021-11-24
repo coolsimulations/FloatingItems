@@ -1,7 +1,7 @@
 {
     "pack": {
         "description": "FloatingItems Resources",
-        "pack_format": 3,
+        "pack_format": 2,
         "_comment": "Lang files for the mod FloatingItems - by coolsim"
     }
 }

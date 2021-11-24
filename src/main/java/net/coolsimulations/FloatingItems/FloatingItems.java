@@ -41,8 +41,8 @@ public class FloatingItems {
 		EntityPlayerMP player = (EntityPlayerMP) event.player;
 
 		if(FIUpdateHandler.isOld == true && FIConfig.disableUpdateCheck == false) {
-			player.sendMessage(FIUpdateHandler.updateInfo);
-			player.sendMessage(FIUpdateHandler.updateVersionInfo);
+			player.addChatMessage(FIUpdateHandler.updateInfo);
+			player.addChatMessage(FIUpdateHandler.updateVersionInfo);
 		}
 	}
 }

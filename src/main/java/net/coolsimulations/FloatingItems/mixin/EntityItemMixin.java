@@ -34,7 +34,7 @@ public abstract class EntityItemMixin extends Entity {
 
 		boolean shouldFloat = false;
 
-		if (!getEntityItem().getItem().onEntityItemUpdate(((EntityItem) (Object) this)) && !this.getEntityItem().isEmpty()) {
+		if (!getEntityItem().getItem().onEntityItemUpdate(((EntityItem) (Object) this)) && this.getEntityItem() != null) {
 
 			if(FIConfig.blacklistItems != null && FIConfig.blacklistItems.length >= 1) {
 				for(FIConfigItem blacklistItem : FIConfig.blacklistItems) {
@@ -87,7 +87,7 @@ public abstract class EntityItemMixin extends Entity {
 
 			if(shouldFloat) {
 
-				IBlockState state = this.world.getBlockState(this.getPosition());
+				IBlockState state = this.worldObj.getBlockState(this.getPosition());
 				float eye = this.getEyeHeight() - 0.11111111F;
 
 				if ((state.getMaterial().isLiquid() && state.getMaterial() != Material.LAVA) && BlockLiquid.getLiquidHeightPercent(state.getValue(BlockLiquid.LEVEL).intValue()) > eye)

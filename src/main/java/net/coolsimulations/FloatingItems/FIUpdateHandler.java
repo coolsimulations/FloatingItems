@@ -21,7 +21,7 @@ public class FIUpdateHandler {
 	public static void init() {
 
 		try {
-			URL url = new URL("https://coolsimulations.net/mcmods/floatingitems/versionchecker111.txt");
+			URL url = new URL("https://coolsimulations.net/mcmods/floatingitems/versionchecker110.txt");
 			Scanner s = new Scanner(url.openStream());
 			latestVersion = s.next();
 			s.close();
@@ -30,7 +30,7 @@ public class FIUpdateHandler {
 		}
 
 		try {
-			URL url = new URL("https://coolsimulations.net/mcmods/floatingitems/updateinfo111.txt");
+			URL url = new URL("https://coolsimulations.net/mcmods/floatingitems/updateinfo110.txt");
 			Scanner s = new Scanner(url.openStream());
 			latestVersionInfo = s.nextLine();
 			s.close();
