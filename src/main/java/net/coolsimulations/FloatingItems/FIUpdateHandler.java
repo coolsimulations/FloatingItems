@@ -3,11 +3,11 @@ package net.coolsimulations.FloatingItems;
 import java.net.URL;
 import java.util.Scanner;
 
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.event.ClickEvent;
-import net.minecraft.util.text.event.HoverEvent;
+import net.minecraft.event.ClickEvent;
+import net.minecraft.event.HoverEvent;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.MinecraftForge;
 
 public class FIUpdateHandler {
@@ -15,13 +15,13 @@ public class FIUpdateHandler {
 	private static String latestVersion;
 	private static String latestVersionInfo;
 	public static boolean isOld = false;
-	public static TextComponentTranslation updateInfo = null;
-	public static TextComponentString updateVersionInfo = null;
+	public static ChatComponentTranslation updateInfo = null;
+	public static ChatComponentText updateVersionInfo = null;
 
 	public static void init() {
 
 		try {
-			URL url = new URL("https://coolsimulations.net/mcmods/floatingitems/versionchecker19.txt");
+			URL url = new URL("https://coolsimulations.net/mcmods/floatingitems/versionchecker18.txt");
 			Scanner s = new Scanner(url.openStream());
 			latestVersion = s.next();
 			s.close();
@@ -30,7 +30,7 @@ public class FIUpdateHandler {
 		}
 
 		try {
-			URL url = new URL("https://coolsimulations.net/mcmods/floatingitems/updateinfo19.txt");
+			URL url = new URL("https://coolsimulations.net/mcmods/floatingitems/updateinfo18.txt");
 			Scanner s = new Scanner(url.openStream());
 			latestVersionInfo = s.nextLine();
 			s.close();
@@ -44,17 +44,17 @@ public class FIUpdateHandler {
 
 				isOld = true;
 
-				TextComponentString fi = new TextComponentString(FIReference.MOD_NAME);
-				fi.getStyle().setColor(TextFormatting.BLUE);
+				ChatComponentText fi = new ChatComponentText(FIReference.MOD_NAME);
+				fi.getChatStyle().setColor(EnumChatFormatting.BLUE);
 
-				TextComponentString MCVersion = new TextComponentString(MinecraftForge.MC_VERSION);
-				MCVersion.getStyle().setColor(TextFormatting.BLUE);
+				ChatComponentText MCVersion = new ChatComponentText(MinecraftForge.MC_VERSION);
+				MCVersion.getChatStyle().setColor(EnumChatFormatting.BLUE);
 
-				updateInfo = new TextComponentTranslation(FILang.getTranslations("floatingitems.update.display3"), new Object[] {fi, MCVersion});
-				updateInfo.getStyle().setColor(TextFormatting.YELLOW);
+				updateInfo = new ChatComponentTranslation(FILang.getTranslations("floatingitems.update.display3"), new Object[] {fi, MCVersion});
+				updateInfo.getChatStyle().setColor(EnumChatFormatting.YELLOW);
 
-				updateInfo.getStyle().setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString(FILang.getTranslations("floatingitems.update.display2"))));
-				updateInfo.getStyle().setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://curseforge.com/minecraft/mc-mods/floatingitems"));
+				updateInfo.getChatStyle().setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText(FILang.getTranslations("floatingitems.update.display2"))));
+				updateInfo.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://curseforge.com/minecraft/mc-mods/floatingitems"));
 
 			}
 
@@ -62,26 +62,26 @@ public class FIUpdateHandler {
 
 				isOld = true;
 
-				TextComponentString fi = new TextComponentString(FIReference.MOD_NAME);
-				fi.getStyle().setColor(TextFormatting.BLUE);
+				ChatComponentText fi = new ChatComponentText(FIReference.MOD_NAME);
+				fi.getChatStyle().setColor(EnumChatFormatting.BLUE);
 
-				TextComponentString version = new TextComponentString(latestVersion);
-				version.getStyle().setColor(TextFormatting.BLUE);
+				ChatComponentText version = new ChatComponentText(latestVersion);
+				version.getChatStyle().setColor(EnumChatFormatting.BLUE);
 
-				updateInfo = new TextComponentTranslation(FILang.getTranslations("floatingitems.update.display1"), new Object[] {fi, version});
-				updateInfo.getStyle().setColor(TextFormatting.YELLOW);
+				updateInfo = new ChatComponentTranslation(FILang.getTranslations("floatingitems.update.display1"), new Object[] {fi, version});
+				updateInfo.getChatStyle().setColor(EnumChatFormatting.YELLOW);
 
-				updateInfo.getStyle().setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString(FILang.getTranslations("floatingitems.update.display2"))));
-				updateInfo.getStyle().setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://curseforge.com/minecraft/mc-mods/floatingitems"));
+				updateInfo.getChatStyle().setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText(FILang.getTranslations("floatingitems.update.display2"))));
+				updateInfo.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://curseforge.com/minecraft/mc-mods/floatingitems"));
 
 				if(latestVersionInfo != null) {
 
-					updateVersionInfo = new TextComponentString(latestVersionInfo);
-					updateVersionInfo.getStyle().setColor(TextFormatting.DARK_AQUA);
-					updateVersionInfo.getStyle().setBold(true);
+					updateVersionInfo = new ChatComponentText(latestVersionInfo);
+					updateVersionInfo.getChatStyle().setColor(EnumChatFormatting.DARK_AQUA);
+					updateVersionInfo.getChatStyle().setBold(true);
 
-					updateVersionInfo.getStyle().setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString(FILang.getTranslations("floatingitems.update.display2"))));
-					updateVersionInfo.getStyle().setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://curseforge.com/minecraft/mc-mods/floatingitems"));
+					updateVersionInfo.getChatStyle().setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText(FILang.getTranslations("floatingitems.update.display2"))));
+					updateVersionInfo.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://curseforge.com/minecraft/mc-mods/floatingitems"));
 
 				}
 

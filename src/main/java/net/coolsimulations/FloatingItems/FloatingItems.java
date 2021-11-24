@@ -29,7 +29,7 @@ public class FloatingItems {
 	@SubscribeEvent
 	public void onConfigChanged(ConfigChangedEvent event)
 	{
-		if (event.getModID().equals(FIReference.MOD_ID))
+		if (event.modID.equals(FIReference.MOD_ID))
 		{
 			FIConfig.syncConfig(false);
 		}

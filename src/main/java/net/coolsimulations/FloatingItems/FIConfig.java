@@ -56,7 +56,7 @@ public class FIConfig {
 			}
 
 			prop = config.get(FIReference.CONFIG_CATEGORY_UTIL, "Blacklist of Items that should not Float", new String[]{});
-			prop.setComment("Format: {Registry Name}(Metadata). Example of Spruce Log: {minecraft:log}(1)");
+			prop.comment = "Format: {Registry Name}(Metadata). Example of Spruce Log: {minecraft:log}(1)";
 
 			List<FIConfigItem> blacklist = new ArrayList<FIConfigItem>();
 			for(String entry : prop.getStringList()) {
@@ -69,17 +69,17 @@ public class FIConfig {
 			propOrder.add(prop.getName());
 			
 			prop = config.get(FIReference.CONFIG_CATEGORY_UTIL, "Blacklist of All Items regardless of Metadata that should not Float", new String[]{});
-			prop.setComment("Format: Registry Name. Example of Cobblestone: minecraft:cobblestone");
+			prop.comment = "Format: Registry Name. Example of Cobblestone: minecraft:cobblestone";
 			blacklistRegistryItems = prop.getStringList();
 			propOrder.add(prop.getName());
 			
 			prop = config.get(FIReference.CONFIG_CATEGORY_UTIL, "Blacklist of OreDict Entries that should not Float", new String[]{});
-			prop.setComment("Format: OreDict. Example of Copper Ingot: ingotCopper");
+			prop.comment = "Format: OreDict. Example of Copper Ingot: ingotCopper";
 			blacklistOreDict = prop.getStringList();
 			propOrder.add(prop.getName());
 
 			prop = config.get(FIReference.CONFIG_CATEGORY_UTIL, "Default Server language", "en_us");
-			prop.setComment("Server language codes are based off the Minecraft .lang files. See https://minecraft.gamepedia.com/Language for list.");
+			prop.comment = "Server language codes are based off the Minecraft .lang files. See https://minecraft.gamepedia.com/Language for list.";
 			serverLang = prop.getString();
 			propOrder.add(prop.getName());
 
@@ -116,7 +116,7 @@ public class FIConfig {
 
 			this.item = stack.getItem();
 			this.meta = item.getMetadata(stack);
-			this.registry = this.item.getRegistryName();
+			this.registry = new ResourceLocation(StringUtils.substringBefore(this.item.getRegistryName(), ":"), StringUtils.substringAfter(this.item.getRegistryName(), ":"));
 		}
 
 		FIConfigItem(String entry) {
@@ -126,7 +126,7 @@ public class FIConfig {
 			this.meta = Integer.parseInt(StringUtils.substringBetween(entry, "(", ")"));
 			String localRegistry = StringUtils.substringBetween(entry, "{", "}");
 			this.registry = new ResourceLocation(StringUtils.substringBefore(localRegistry, ":"), StringUtils.substringAfter(localRegistry, ":"));
-			this.item = Item.REGISTRY.getObject(this.registry);
+			this.item = Item.itemRegistry.getObject(this.registry);
 		}
 
 		public Item getItem() {

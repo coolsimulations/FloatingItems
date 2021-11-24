@@ -90,7 +90,7 @@ public abstract class EntityItemMixin extends Entity {
 				IBlockState state = this.worldObj.getBlockState(this.getPosition());
 				float eye = this.getEyeHeight() - 0.11111111F;
 
-				if ((state.getMaterial().isLiquid() && state.getMaterial() != Material.LAVA) && BlockLiquid.getLiquidHeightPercent(state.getValue(BlockLiquid.LEVEL).intValue()) > eye)
+				if ((state.getBlock().getMaterial().isLiquid() && state.getBlock().getMaterial() != Material.lava) && BlockLiquid.getLiquidHeightPercent(state.getValue(BlockLiquid.LEVEL).intValue()) > eye)
 				{
 					setUnderWaterMovement(this);
 					this.motionY += 0.03999999910593033D;
