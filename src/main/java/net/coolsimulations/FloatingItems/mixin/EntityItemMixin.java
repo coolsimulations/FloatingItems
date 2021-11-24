@@ -93,9 +93,7 @@ public abstract class EntityItemMixin extends Entity {
 				if ((state.getMaterial().isLiquid() && state.getMaterial() != Material.LAVA) && BlockLiquid.getLiquidHeightPercent(state.getValue(BlockLiquid.LEVEL).intValue()) > eye)
 				{
 					setUnderWaterMovement(this);
-					if (!this.hasNoGravity()) {
-						this.motionY += 0.03999999910593033D;
-					}
+					this.motionY += 0.03999999910593033D;
 				}
 			}
 		}
