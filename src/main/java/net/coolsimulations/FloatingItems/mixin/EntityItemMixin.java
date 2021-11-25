@@ -9,13 +9,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.coolsimulations.FloatingItems.FIConfig;
 import net.coolsimulations.FloatingItems.FIConfig.FIConfigItem;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialLiquid;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -50,8 +51,8 @@ public abstract class EntityItemMixin extends Entity {
 			}
 			
 			if(!shouldFloat && FIConfig.blacklistRegistryItems != null && FIConfig.blacklistRegistryItems.length >= 1) {
-				for(String blacklistItem : FIConfig.blacklistRegistryItems) {
-					if(blacklistItem.equals(this.getEntityItem().getItem().getRegistryName().toString())) {
+				for(int blacklistItem : FIConfig.blacklistRegistryItems) {
+					if(blacklistItem == Item.getIdFromItem(this.getEntityItem().getItem())) {
 						return;
 					}
 				}
@@ -87,10 +88,10 @@ public abstract class EntityItemMixin extends Entity {
 
 			if(shouldFloat) {
 
-				IBlockState state = this.worldObj.getBlockState(this.getPosition());
+				Block state = this.worldObj.getBlock((int) this.posX, (int) this.posY, (int) this.posZ);
 				float eye = this.getEyeHeight() - 0.11111111F;
 
-				if ((state.getBlock().getMaterial().isLiquid() && state.getBlock().getMaterial() != Material.lava) && BlockLiquid.getLiquidHeightPercent(state.getValue(BlockLiquid.LEVEL).intValue()) > eye)
+				if ((state.getMaterial().isLiquid() && state.getMaterial() != Material.lava) && BlockLiquid.getLiquidHeightPercent(this.worldObj.getBlockMetadata(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ))) > eye)
 				{
 					setUnderWaterMovement(this);
 					this.motionY += 0.03999999910593033D;

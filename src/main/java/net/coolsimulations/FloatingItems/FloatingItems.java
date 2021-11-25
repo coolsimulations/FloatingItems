@@ -2,16 +2,16 @@ package net.coolsimulations.FloatingItems;
 
 import java.io.File;
 
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.client.event.ConfigChangedEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 
-@Mod(modid = FIReference.MOD_ID, name = FIReference.MOD_NAME, version = FIReference.VERSION, acceptedMinecraftVersions = FIReference.ACCEPTED_VERSIONS, dependencies = FIReference.DEPENDENCIES, acceptableRemoteVersions = "*", guiFactory = "net.coolsimulations.FloatingItems.FIConfigGUI", updateJSON = "https://coolsimulations.net/mcmods/floatingitems/versionchecker.json")
+@Mod(modid = FIReference.MOD_ID, name = FIReference.MOD_NAME, version = FIReference.VERSION, acceptedMinecraftVersions = FIReference.ACCEPTED_VERSIONS, dependencies = FIReference.DEPENDENCIES, acceptableRemoteVersions = "*", guiFactory = "net.coolsimulations.FloatingItems.FIConfigGUI")
 public class FloatingItems {
 
 	@Mod.Instance(FIReference.MOD_ID)

@@ -533,7 +533,7 @@ public class FILang {
 		
 		if(text == "floatingitems.update.display3") {
 			
-			return "¡sǝɹnʇɐǝɟ ǝɹoɯ ɹoɟ ǝʇɐpdn ǝsɐǝꞁԀ ¡6˙8˙⥝ uoᴉsɹǝΛ ʇɟɐɹɔǝuᴉW sʇɹoddns ɹǝᵷuoꞁ ou doʇS ɹǝʌɹǝS";
+			return "¡sǝɹnʇɐǝɟ ǝɹoɯ ɹoɟ ǝʇɐpdn ǝsɐǝꞁԀ ¡0⥝˙ㄥ˙⥝ uoᴉsɹǝΛ ʇɟɐɹɔǝuᴉW sʇɹoddns ɹǝᵷuoꞁ ou doʇS ɹǝʌɹǝS";
 		}
 		
 		if(text == "fi.configgui.title") {

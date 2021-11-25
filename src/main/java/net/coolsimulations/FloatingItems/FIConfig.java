@@ -7,14 +7,14 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Level;
 
+import cpw.mods.fml.client.config.IConfigElement;
+import cpw.mods.fml.relauncher.FMLRelaunchLog;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
-import net.minecraftforge.fml.client.config.IConfigElement;
-import net.minecraftforge.fml.relauncher.FMLRelaunchLog;
 
 public class FIConfig {
 
@@ -22,7 +22,7 @@ public class FIConfig {
 
 	public static FIConfigItem[] blacklistItems;
 	
-	public static String[] blacklistRegistryItems;
+	public static int[] blacklistRegistryItems;
 	
 	public static String[] blacklistOreDict;
 
@@ -56,7 +56,7 @@ public class FIConfig {
 			}
 
 			prop = config.get(FIReference.CONFIG_CATEGORY_UTIL, "Blacklist of Items that should not Float", new String[]{});
-			prop.comment = "Format: {Registry Name}(Metadata). Example of Spruce Log: {minecraft:log}(1)";
+			prop.comment = "Format: {Item ID}(Metadata). Example of Spruce Log: {17}(1)";
 
 			List<FIConfigItem> blacklist = new ArrayList<FIConfigItem>();
 			for(String entry : prop.getStringList()) {
@@ -68,9 +68,9 @@ public class FIConfig {
 
 			propOrder.add(prop.getName());
 			
-			prop = config.get(FIReference.CONFIG_CATEGORY_UTIL, "Blacklist of All Items regardless of Metadata that should not Float", new String[]{});
-			prop.comment = "Format: Registry Name. Example of Cobblestone: minecraft:cobblestone";
-			blacklistRegistryItems = prop.getStringList();
+			prop = config.get(FIReference.CONFIG_CATEGORY_UTIL, "Blacklist of All Items regardless of Metadata that should not Float", new int[]{});
+			prop.comment = "Format: Item ID. Example of Cobblestone: 4";
+			blacklistRegistryItems = prop.getIntList();
 			propOrder.add(prop.getName());
 			
 			prop = config.get(FIReference.CONFIG_CATEGORY_UTIL, "Blacklist of OreDict Entries that should not Float", new String[]{});
@@ -108,15 +108,15 @@ public class FIConfig {
 
 	public static class FIConfigItem {
 
-		private ResourceLocation registry;
+		private int registry;
 		private int meta;
 		private Item item;
 
 		FIConfigItem(ItemStack stack) {
 
 			this.item = stack.getItem();
-			this.meta = item.getMetadata(stack);
-			this.registry = new ResourceLocation(StringUtils.substringBefore(this.item.getRegistryName(), ":"), StringUtils.substringAfter(this.item.getRegistryName(), ":"));
+			this.meta = stack.getMetadata();
+			this.registry = Item.getIdFromItem(this.item);
 		}
 
 		FIConfigItem(String entry) {
@@ -124,9 +124,8 @@ public class FIConfig {
 			entry = entry.replaceAll(" ", "");
 
 			this.meta = Integer.parseInt(StringUtils.substringBetween(entry, "(", ")"));
-			String localRegistry = StringUtils.substringBetween(entry, "{", "}");
-			this.registry = new ResourceLocation(StringUtils.substringBefore(localRegistry, ":"), StringUtils.substringAfter(localRegistry, ":"));
-			this.item = Item.itemRegistry.getObject(this.registry);
+			this.registry = Integer.parseInt(StringUtils.substringBetween(entry, "{", "}"));
+			this.item = (Item) Item.itemRegistry.getObjectById(this.registry);
 		}
 
 		public Item getItem() {
@@ -149,7 +148,7 @@ public class FIConfig {
 			return new ItemStack(this.item, count, this.meta);
 		}
 
-		public ResourceLocation getRegistry() {
+		public int getRegistry() {
 
 			return this.registry;
 		}
@@ -157,7 +156,7 @@ public class FIConfig {
 		@Override
 		public String toString() {
 
-			return "{" + registry.getResourceDomain() + ":" + registry.getResourcePath() + "}(" + this.meta + ")";
+			return "{" + this.registry + "}(" + this.meta + ")";
 		}
 
 		@Override
