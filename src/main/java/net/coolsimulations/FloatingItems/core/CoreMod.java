@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.Mixins;
 
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 
-@IFMLLoadingPlugin.MCVersion("1.12.2")
 @IFMLLoadingPlugin.Name("FloatingItems")
 public class CoreMod implements IFMLLoadingPlugin {
 
